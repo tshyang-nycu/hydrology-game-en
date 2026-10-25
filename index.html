@@ -977,7 +977,7 @@ function chooseCmd(p){
      if(ok){if(typeof uploadWork==='function')await uploadWork(FOES[BT.boss].q);await breakBarrier();} main();}
    });el.dataset.lock='0';el.querySelector('button').focus({preventScroll:true});showCmds();};
   const skills=()=>{el.dataset.lock='0';const sk=G.sk[p.id];
-   el.innerHTML=sk.map(k=>`<button data-k="${k}" ${p.cur.mp<SK[k].mp?'disabled':''}>${SK[k].n}<small>${SK[k].mp?'MP '+SK[k].mp:'HP'}</small></button>`).join('')+'<button data-k="back" class="ghost">Back</button>';
+   el.innerHTML=sk.map(k=>`<button data-k="${k}" ${p.cur.mp<SK[k].mp?'disabled':''}>${SK[k].n}<small>${SK[k].mp?'MP '+SK[k].mp:'Costs '+Math.round(SK[k].cost*100)+'% HP'}</small></button>`).join('')+'<button data-k="back" class="ghost">Back</button>';
    document.getElementById('blog').textContent='Choose a skill ('+nm+')';
    el.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(el.dataset.lock==='1')return;SND.sfx('sel');if(b.dataset.k==='back')return main();const k=b.dataset.k;if(SK[k].t==='one')return pickTarget(ti=>finish({t:'sk',k,crit:p.crit,ti}));el.dataset.lock='1';finish({t:'sk',k,crit:p.crit});});el.querySelector('button').focus({preventScroll:true});showCmds();};
   const items=()=>{el.dataset.lock='0';document.getElementById('blog').textContent='Who gets the rice ball? (Restores 50% HP and can revive a fallen ally)';
